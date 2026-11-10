@@ -1,0 +1,58 @@
+{
+  "case1_missing_B": {
+    "task_status": "completed",
+    "expected_scope_authoritative_external": true,
+    "expected_requests": [
+      "case1_missing_B-A",
+      "case1_missing_B-B"
+    ],
+    "expected_requests_without_visible_request_record": [],
+    "final_linked_reports_evidenced_for": [
+      "case1_missing_B-A"
+    ],
+    "requests_without_evidenced_reports": [
+      "case1_missing_B-B"
+    ],
+    "unusable_report_references": [],
+    "receiver_state": "INSUFFICIENT_REPORT_EVIDENCE",
+    "clinical_completion_proven": false,
+    "authority_verified": false,
+    "note": "Snapshot evidence only. Not a clinical, legal, identity, authority, or exhaustive-obligation verification."
+  },
+  "case2_both_received": {
+    "task_status": "completed",
+    "expected_scope_authoritative_external": true,
+    "expected_requests": [
+      "case2_both_received-A",
+      "case2_both_received-B"
+    ],
+    "expected_requests_without_visible_request_record": [],
+    "final_linked_reports_evidenced_for": [
+      "case2_both_received-A",
+      "case2_both_received-B"
+    ],
+    "requests_without_evidenced_reports": [],
+    "unusable_report_references": [],
+    "receiver_state": "ALL_AGREED_EXPECTED_REPORTS_PRESENT_IN_SNAPSHOT",
+    "clinical_completion_proven": false,
+    "authority_verified": false,
+    "note": "Snapshot evidence only. Not a clinical, legal, identity, authority, or exhaustive-obligation verification."
+  },
+  "case3_only_A_known": {
+    "task_status": "completed",
+    "expected_scope_authoritative_external": false,
+    "expected_requests": [
+      "case3_only_A_known-A"
+    ],
+    "expected_requests_without_visible_request_record": [],
+    "final_linked_reports_evidenced_for": [
+      "case3_only_A_known-A"
+    ],
+    "requests_without_evidenced_reports": [],
+    "unusable_report_references": [],
+    "receiver_state": "ALL_KNOWN_REPORTS_PRESENT_SCOPE_UNKNOWN",
+    "clinical_completion_proven": false,
+    "authority_verified": false,
+    "note": "Snapshot evidence only. Not a clinical, legal, identity, authority, or exhaustive-obligation verification."
+  }
+}

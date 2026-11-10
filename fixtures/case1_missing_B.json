@@ -1,0 +1,183 @@
+{
+  "resourceType": "Bundle",
+  "id": "3512ee87-8bd4-59c3-8128-aced2d414c6f",
+  "type": "collection",
+  "timestamp": "2026-11-10T12:00:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:2b0e6123-687a-56a8-9297-33d514a1da97",
+      "resource": {
+        "resourceType": "Patient",
+        "name": [
+          {
+            "family": "Synthetic",
+            "given": [
+              "Example"
+            ]
+          }
+        ],
+        "id": "2b0e6123-687a-56a8-9297-33d514a1da97"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:36bde29c-6ea6-551f-bc99-f9f84d4a0869",
+      "resource": {
+        "resourceType": "Organization",
+        "name": "Synthetic Referral Hospital",
+        "id": "36bde29c-6ea6-551f-bc99-f9f84d4a0869"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7f41c655-eb36-5d30-b37b-85a7bf656622",
+      "resource": {
+        "resourceType": "Organization",
+        "name": "Synthetic Diagnostic Provider",
+        "id": "7f41c655-eb36-5d30-b37b-85a7bf656622"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7f8bfb1d-0768-5e21-a741-1187079a4c2f",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "status": "active",
+        "intent": "order",
+        "identifier": [
+          {
+            "system": "https://example.invalid/orders",
+            "value": "case1_missing_B-A"
+          }
+        ],
+        "requisition": {
+          "system": "https://example.invalid/requisitions",
+          "value": "SYNTH-case1_missing_B-REQUISITION"
+        },
+        "code": {
+          "text": "Synthetic diagnostic examination A"
+        },
+        "subject": {
+          "reference": "urn:uuid:2b0e6123-687a-56a8-9297-33d514a1da97"
+        },
+        "requester": {
+          "reference": "urn:uuid:36bde29c-6ea6-551f-bc99-f9f84d4a0869"
+        },
+        "performer": [
+          {
+            "reference": "urn:uuid:7f41c655-eb36-5d30-b37b-85a7bf656622"
+          }
+        ],
+        "authoredOn": "2026-11-09T09:00:00Z",
+        "id": "7f8bfb1d-0768-5e21-a741-1187079a4c2f"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8a9dad31-878c-5eeb-aca3-0b47f700655a",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "status": "active",
+        "intent": "order",
+        "identifier": [
+          {
+            "system": "https://example.invalid/orders",
+            "value": "case1_missing_B-B"
+          }
+        ],
+        "requisition": {
+          "system": "https://example.invalid/requisitions",
+          "value": "SYNTH-case1_missing_B-REQUISITION"
+        },
+        "code": {
+          "text": "Synthetic diagnostic examination B"
+        },
+        "subject": {
+          "reference": "urn:uuid:2b0e6123-687a-56a8-9297-33d514a1da97"
+        },
+        "requester": {
+          "reference": "urn:uuid:36bde29c-6ea6-551f-bc99-f9f84d4a0869"
+        },
+        "performer": [
+          {
+            "reference": "urn:uuid:7f41c655-eb36-5d30-b37b-85a7bf656622"
+          }
+        ],
+        "authoredOn": "2026-11-09T09:00:00Z",
+        "id": "8a9dad31-878c-5eeb-aca3-0b47f700655a"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5c52fac0-ed11-5a87-b440-7f8dd7b100c5",
+      "resource": {
+        "resourceType": "Task",
+        "status": "completed",
+        "intent": "order",
+        "description": "Sender reports diagnostic workflow complete; this does not prove receiver-side evidence completeness.",
+        "groupIdentifier": {
+          "system": "https://example.invalid/requisitions",
+          "value": "SYNTH-case1_missing_B-REQUISITION"
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:7f8bfb1d-0768-5e21-a741-1187079a4c2f"
+          },
+          {
+            "reference": "urn:uuid:8a9dad31-878c-5eeb-aca3-0b47f700655a"
+          }
+        ],
+        "for": {
+          "reference": "urn:uuid:2b0e6123-687a-56a8-9297-33d514a1da97"
+        },
+        "requester": {
+          "reference": "urn:uuid:36bde29c-6ea6-551f-bc99-f9f84d4a0869"
+        },
+        "owner": {
+          "reference": "urn:uuid:7f41c655-eb36-5d30-b37b-85a7bf656622"
+        },
+        "authoredOn": "2026-11-09T09:00:00Z",
+        "lastModified": "2026-11-09T12:00:00Z",
+        "output": [
+          {
+            "type": {
+              "text": "Synthetic diagnostic report A"
+            },
+            "valueReference": {
+              "reference": "urn:uuid:0ae9995c-9ded-521d-b21c-a32b95b79924"
+            }
+          }
+        ],
+        "id": "5c52fac0-ed11-5a87-b440-7f8dd7b100c5"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0ae9995c-9ded-521d-b21c-a32b95b79924",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "status": "final",
+        "identifier": [
+          {
+            "system": "https://example.invalid/reports",
+            "value": "case1_missing_B-A"
+          }
+        ],
+        "code": {
+          "text": "Synthetic diagnostic report A"
+        },
+        "basedOn": [
+          {
+            "reference": "urn:uuid:7f8bfb1d-0768-5e21-a741-1187079a4c2f"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:2b0e6123-687a-56a8-9297-33d514a1da97"
+        },
+        "performer": [
+          {
+            "reference": "urn:uuid:7f41c655-eb36-5d30-b37b-85a7bf656622"
+          }
+        ],
+        "effectiveDateTime": "2026-11-09T11:30:00Z",
+        "issued": "2026-11-09T11:45:00Z",
+        "conclusion": "Synthetic normal report A; no real patient or clinical finding.",
+        "id": "0ae9995c-9ded-521d-b21c-a32b95b79924"
+      }
+    }
+  ]
+}

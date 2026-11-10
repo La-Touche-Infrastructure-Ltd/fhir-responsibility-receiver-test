@@ -1,0 +1,29 @@
+{
+  "title": "Receiver reliance assumptions (outside FHIR)",
+  "warning": "The complete expectation boundary is an external agreement/receiver policy, not an HL7 FHIR R4 primitive or claim made by this example. Never infer all external obligations merely from Bundle contents.",
+  "cases": {
+    "case1_missing_B": {
+      "expected_service_requests": [
+        "case1_missing_B-A",
+        "case1_missing_B-B"
+      ],
+      "expected_scope_authoritative": true,
+      "description": "Two independently ordered examinations are agreed to exhaust this synthetic group, but B report is unavailable to the receiver."
+    },
+    "case2_both_received": {
+      "expected_service_requests": [
+        "case2_both_received-A",
+        "case2_both_received-B"
+      ],
+      "expected_scope_authoritative": true,
+      "description": "Two independently ordered examinations are agreed to exhaust this synthetic group, and both report resources are present."
+    },
+    "case3_only_A_known": {
+      "expected_service_requests": [
+        "case3_only_A_known-A"
+      ],
+      "expected_scope_authoritative": false,
+      "description": "Only examination A is in receiver-visible requests; no evidence establishes that the receiver knows the full obligation set."
+    }
+  }
+}
