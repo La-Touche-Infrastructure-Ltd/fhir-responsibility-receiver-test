@@ -42,7 +42,7 @@ The **v0.2 correction** makes the receiver use the explicitly declared `expected
 * The separate policy declares whether the receiver has an exhaustive expectation set. The FHIR Bundle alone does not establish that fact. Whether an existing relevant workflow profile supplies it is an **open question**.
 * No real patient information, authority verification, signatures, provenance-chain validation or clinical safety assurance is included. The synthetic institution names, identifiers and observations are fictional.
 * This repository is not affiliated with, approved by or endorsed by NHS England, HL7, IHE or Kevin Mayfield. The cited PatientCareCoordination guide identifies itself as a demonstration only.
-* Only this standalone, synthetic test code and data are published. No RIIP gateway implementation, secret, customer record or private research is included. **No open-source licence is granted by this repository unless one is added explicitly.** Third-party rights and trademarks remain with their respective owners.
+* Only this standalone, synthetic test code and data are published. No private gateway implementation, secret, customer record or unpublished research is included. **No open-source licence is granted by this repository unless one is added explicitly.** Third-party rights and trademarks remain with their respective owners.
 
 ## Research question
 
