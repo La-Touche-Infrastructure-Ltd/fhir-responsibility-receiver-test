@@ -1,0 +1,76 @@
+name: FHIR R4 synthetic validation and comparison
+on:
+  push:
+    branches: [research/fhir-native-comparison-2026-11-12]
+  pull_request:
+    paths:
+      - "fixtures/**"
+      - "comparison/**"
+      - "*.py"
+      - "receiver-policy.json"
+      - ".github/workflows/validate-fhir-r4.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare-and-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Run existing tests and generate parent-child alternative
+        run: |
+          set -euo pipefail
+          python build_fixtures.py
+          python structural_checks.py
+          python receiver.py
+          python comparison/build_parent_child.py
+          python comparison/compare_receivers.py
+          python comparison/test_comparison.py
+      - name: Obtain pinned official HL7 Java validator
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --retry-delay 3 --connect-timeout 20 --max-time 300 \
+            -o validator_cli.jar \
+            https://github.com/hapifhir/org.hl7.fhir.core/releases/download/7.0.5/validator_cli.jar
+          echo "9dfe9f305b0f9389eceade2a4a1c9a2740d7b0e614066fdf07a78b571c76d92f  validator_cli.jar" | sha256sum -c -
+          java -jar validator_cli.jar -help | head -25 || true
+      - name: Validate original and alternative Bundles against R4 core 4.0.1
+        run: |
+          set -uo pipefail
+          mkdir -p comparison/validation-outputs
+          failed=0
+          for f in fixtures/case*.json comparison/fixtures/case*.json; do
+            key=$(echo "$f" | tr '/.' '__')
+            echo "==== Official HL7 validator: $f ===="
+            java -Xmx4g -jar validator_cli.jar "$f" \
+              -version 4.0.1 -tx n/a -recurse \
+              -output "comparison/validation-outputs/$key.json" \
+              > "comparison/validation-outputs/$key.log" 2>&1
+            code=$?
+            echo "$f exit=$code"
+            tail -n 14 "comparison/validation-outputs/$key.log" || true
+            [ "$code" -eq 0 ] || failed=1
+          done
+          python comparison/summarize_validator.py comparison/validation-outputs/*.json || failed=1
+          if [ "$failed" -ne 0 ]; then
+            echo "Validation reported errors, unreadable output or a failed CLI invocation."
+            exit 1
+          fi
+      - name: Save validator logs, outcomes and comparison results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-fhir-r4-validator-evidence
+          path: |
+            comparison/validation-outputs/
+            comparison/validation-summary.json
+            comparison/comparison-results.json
+          if-no-files-found: warn
