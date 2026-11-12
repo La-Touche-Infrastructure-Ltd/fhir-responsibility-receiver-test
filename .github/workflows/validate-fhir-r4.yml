@@ -1,7 +1,7 @@
 name: FHIR R4 synthetic validation and comparison
 on:
   push:
-    branches: [research/fhir-native-comparison-2026-11-12]
+    branches: [main, research/fhir-native-comparison-2026-11-12]
   pull_request:
     paths:
       - "fixtures/**"
