@@ -69,7 +69,7 @@ The CI workflow attempts to run the official HL7 FHIR Java CLI validator **v7.0.
 - The FHIR R4 *core* check is not validation against a named clinical implementation guide. IHE LAB-3, RAD-128, applicable NHS/UK Core IGs and business workflow agreements have not been formally evaluated in this synthetic test.
 - Any validator warnings/errors must be recorded and addressed or retained explicitly; **passing local unit tests is not an HL7 validator pass**.
 - A successful validator run does not establish an independent implementation, real-world transport interoperability, provenance reliability, legal authority, clinical safety or evidence of a standards gap.
-- At initial publication of this note, **official validator outcomes were pending**. Later CI artifacts, not this sentence, are the record of what actually ran.
+- **Official core R4 execution on 12 November 2026:** six Bundles, zero errors/fatals, 47 dom-6 narrative warnings and eight information messages. See the [dated validator record](VALIDATION_RECORD_2026-11-12.md) and linked workflow artifacts. No relevant clinical IG was loaded.
 
 ## Contribution request
 
