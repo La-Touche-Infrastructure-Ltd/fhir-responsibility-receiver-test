@@ -21,7 +21,7 @@
 | Parent/child C | 0 | 7 | 1 |
 | **Total** | **0** | **47** | **8** |
 
-**All 47 warnings are the FHIR `dom-6` best-practice recommendation that resources should have a human-readable narrative.** The warnings remain open; zero-error core validation should not be represented as a zero-warning or full conformance result.
+**All 47 warnings are the FHIR `dom-6` best-practice recommendation that resources should have a human-readable narrative.** The eight informational messages state that terminology bindings for text-only `Task.output.type` values could not be checked because no source code system was provided. Thus, even apart from disabling the terminology server, the result is **not full terminology validation**. The narrative warnings remain open; zero-error core validation should not be represented as a zero-warning or full conformance result.
 
 ## Local regression and comparison (same CI run)
 
