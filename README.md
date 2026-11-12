@@ -4,6 +4,13 @@ A small, **synthetic and independently inspectable** research exercise examining
 
 **Status:** exploratory. The author reports 10 local structural/behavioural tests passing. The fixtures have **not** passed the official HL7 R4 validator or relevant implementation-guide validation, and **no independent receiver or clinical interoperability test** has been completed. The experiment is not an HL7, IHE or NHS conformance claim or endorsement.
 
+## Official R4 core validation and comparison (12 November 2026)
+
+- The **original three synthetic Bundles** and **three generated parent/child Task alternatives** were run through the official HL7 Java validator **v7.0.5**, against **FHIR R4 core 4.0.1**, with **zero errors/fatals** and **47 documented `dom-6` narrative warnings**. No applicable clinical implementation-guide profiles or terminology server were evaluated.
+- The **10 original** and **8 additional comparison** local tests passed. The comparison does not establish independent interoperability or actual clinical completeness.
+- Read the [dated validation record](comparison/VALIDATION_RECORD_2026-11-12.md), [FHIR-native comparison](comparison/COMPARISON.md), and [independent reproduction invitation](comparison/INDEPENDENT_RECEIVER_INVITATION.md).
+- Existing standards support grouping requests and parent/child Tasks; whether the receiver can establish an **exhaustive expected set** from what is exchanged remains an open, implementation-dependent research question. [Contribute a correction or counterexample in Issue #1](https://github.com/La-Touche-Infrastructure-Ltd/fhir-responsibility-receiver-test/issues/1).
+
 ## The research question
 
 A sender may mark a `Task` completed even when the receiving system cannot establish that it has **every expected diagnostic report**.
