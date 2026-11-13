@@ -32,7 +32,7 @@ python receiver.py
 
 For Linux/macOS, you may need `python3` instead of `python`.
 
-The local structural/mutation test suite contains **10 tests**. All passed in the author's local environment on 10 November 2026. The receiver creates `results.json`; compare it with the checked-in output. `SHA256SUMS.txt` lists the checked-in publication files by relative path (use `sha256sum -c SHA256SUMS.txt` on a compatible system). Re-running `receiver.py` should reproduce the committed results.
+The local structural/mutation test suite contains **10 tests**. All passed in the author's local environment on 10 November 2026. The receiver creates `results.json`; compare it with the checked-in output. `SHA256SUMS.txt` lists the frozen baseline fixtures, scripts, policy and results by relative path (use `sha256sum -c SHA256SUMS.txt` on a compatible system). The dated documentation notes are excluded so subsequent validation updates do not change the original baseline checksums. Re-running `receiver.py` should reproduce the committed results.
 
 The **v0.2 correction** makes the receiver use the explicitly declared `expected_service_requests` in `receiver-policy.json`, rather than inferring the complete obligation list from the requests present in a single Bundle. Two new regression tests cover absent request resources and missing Task order linkage. This supersedes the original v0.1 local suite of eight checks without changing the underlying three scenarios.
 
