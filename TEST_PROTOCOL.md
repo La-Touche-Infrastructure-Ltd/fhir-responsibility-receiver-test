@@ -2,6 +2,8 @@
 
 **La Touche Infrastructure Ltd · 10 November 2026 · Synthetic research only**
 
+**Validation update (12 November 2026):** Since this original v0.2 protocol was written, six synthetic Bundles (three baseline and three derived parent/child Task comparisons) were checked with official HL7 FHIR Java validator v7.0.5 against core R4 4.0.1: **zero errors/fatals, 47 `dom-6` warnings, eight informational messages**. The 10 baseline and 8 comparison study-local tests passed. No applicable clinical IG, full terminology check, independent receiver or clinical exchange was validated. See [validation record](comparison/VALIDATION_RECORD_2026-11-12.md). The original three-case protocol and fixtures remain unchanged.
+
 This independently inspectable **study-local** exercise compares a sender's completed Task with receiver-visible final diagnostic reports and a *separately agreed* list of expected ServiceRequest identifiers. It does **not** establish a missing requirement in FHIR, HL7, IHE, NHS UK Core or Kevin Mayfield's PatientCareCoordination proof of concept.
 
 ## Source and relation to PCC-57
@@ -30,13 +32,13 @@ python receiver.py
 
 For Linux/macOS, you may need `python3` instead of `python`.
 
-The local structural/mutation test suite contains **10 tests**. All passed in the author's local environment on 10 November 2026. The receiver creates `results.json`; compare it with the checked-in output. `SHA256SUMS.txt` lists the checked-in publication files by relative path (use `sha256sum -c SHA256SUMS.txt` on a compatible system). Re-running `receiver.py` should reproduce the committed results.
+The local structural/mutation test suite contains **10 tests**. All passed in the author's local environment on 10 November 2026. The receiver creates `results.json`; compare it with the checked-in output. `SHA256SUMS.txt` lists the frozen baseline fixtures, scripts, policy and results by relative path (use `sha256sum -c SHA256SUMS.txt` on a compatible system). The dated documentation notes are excluded so subsequent validation updates do not change the original baseline checksums. Re-running `receiver.py` should reproduce the committed results.
 
 The **v0.2 correction** makes the receiver use the explicitly declared `expected_service_requests` in `receiver-policy.json`, rather than inferring the complete obligation list from the requests present in a single Bundle. Two new regression tests cover absent request resources and missing Task order linkage. This supersedes the original v0.1 local suite of eight checks without changing the underlying three scenarios.
 
-## Formal validation and interpretation limits
+## Formal validation and interpretation limits — original protocol, with subsequent update above
 
-* Files are FHIR R4-shaped JSON and pass **study-local, deliberately incomplete structural/reference checks**. They have **not** been tested with the official HL7 FHIR Java validator against core R4 4.0.1 or relevant profile packages.
+* **At the original 10 November execution**, files were FHIR R4-shaped JSON passing study-local, deliberately incomplete structural/reference checks; official HL7 validator execution had not yet occurred. **On 12 November**, six synthetic Bundles subsequently received zero-error official R4 4.0.1 core validation, with the warnings and information messages documented above. They have **not** been validated against named clinical IG/profile packages.
 * No independent second receiver or FHIR messaging/REST round trip has been run. This is **not** an interoperability conformance report.
 * The test requires both a `DiagnosticReport.basedOn` link to the expected request and a matching `Task.output` reference (and now requires that request in `Task.basedOn`). This is a chosen **local rule**, **not** a universal FHIR rule.
 * The separate policy declares whether the receiver has an exhaustive expectation set. The FHIR Bundle alone does not establish that fact. Whether an existing relevant workflow profile supplies it is an **open question**.

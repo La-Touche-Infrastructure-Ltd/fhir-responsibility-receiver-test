@@ -62,9 +62,9 @@ python comparison/test_comparison.py
 
 The comparison script checks that the three study-local receiver states match the original baseline when the **same external policy assumptions** are supplied. Negative controls alter expected-set exhaustiveness, remove a child Task or report, and change a report away from `final`. Results are generated at `comparison/comparison-results.json` and should be treated as **local calculations**, not proof of actual cross-system interoperability.
 
-## Official validation plan and limits
+## Official core validation completed 12 November 2026 — limits
 
-The CI workflow attempts to run the official HL7 FHIR Java CLI validator **v7.0.5** against **R4 core 4.0.1** on original and generated JSON Bundles and saves machine-readable `OperationOutcome` files.
+The CI workflow **ran** the official HL7 FHIR Java CLI validator **v7.0.5** against **R4 core 4.0.1** on original and generated JSON Bundles and recorded machine-readable `OperationOutcome` files on 12 November 2026. The dated record identifies the completed run and its retained limitations.
 
 - The FHIR R4 *core* check is not validation against a named clinical implementation guide. IHE LAB-3, RAD-128, applicable NHS/UK Core IGs and business workflow agreements have not been formally evaluated in this synthetic test.
 - Any validator warnings/errors must be recorded and addressed or retained explicitly; **passing local unit tests is not an HL7 validator pass**.

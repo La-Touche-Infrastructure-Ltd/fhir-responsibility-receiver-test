@@ -1,7 +1,9 @@
 # PCC-57 / Diagnostic Ordering: Independent Receiver Evidence Test
 
 **La Touche Infrastructure Ltd — exploratory research note, 10 November 2026**  
-**Status: v0.2 synthetic test pack / preliminary local execution — NOT FHIR or IG conformance validated**
+**Original status (10 November 2026): v0.2 synthetic test pack / preliminary local execution — official validation not yet performed at that date.**
+
+**Subsequent evidence update (12 November 2026):** The official HL7 FHIR Java validator v7.0.5 reported **zero errors/fatals** for six synthetic Bundles against FHIR R4 core 4.0.1, alongside **47 `dom-6` narrative warnings and eight informational messages**. Ten original and eight comparison study-local tests passed. No named clinical IG/profile or full terminology validation was performed; no independent receiver, real-world interoperability or clinical conformance was demonstrated. See [the dated validation record](comparison/VALIDATION_RECORD_2026-11-12.md) and [the comparison note](comparison/COMPARISON.md). The original findings below retain their 10 November evidential scope.
 
 ## Executive finding
 
@@ -35,7 +37,7 @@ The test packages each case as a FHIR R4 `Bundle` (`type=collection`) with synth
 * A status `final` is itself an assertion recorded in FHIR, not independent verification of the issuer's clinical credentials or legal authority.
 * The local receiver requires both a final `DiagnosticReport.basedOn` match and a corresponding `Task.output` link. This is a **test-specific stricter policy**, not a universal HL7 FHIR R4 requirement.
 
-## Execution and validation record
+## Execution and validation record — original 10 November baseline
 
 **Completed locally:**
 
@@ -44,7 +46,7 @@ The test packages each case as a FHIR R4 `Bundle` (`type=collection`) with synth
 3. Ran a dependency-free Python receiver over the three cases and compared outputs to expected states.
 4. Ran 10 automated structural/behavioural unit tests in v0.2, including deliberate missing-link, non-final-report, wrong-link, absent-request and omitted Task-order-link mutations — all passed on 10 November 2026. The prior v0.1 pack had 8 local tests.
 
-**Not completed / must not be implied:**
+**Not completed as of 10 November (subsequently updated where stated above) / must not be implied:**
 
 * Official HL7 Java FHIR validator execution against `hl7.fhir.r4.core#4.0.1`.
 * Validation against Kevin's project-generated profiles/StructureDefinitions or a published NHS UK Core profile.
@@ -52,7 +54,7 @@ The test packages each case as a FHIR R4 `Bundle` (`type=collection`) with synth
 * Identity, role/authority, signatures, provenance-chain, authenticity or clinical-safety verification.
 * Completeness of the receiver's real-world query/search environment, including pagination, report revisions, non-final and retracted reports, delayed delivery and data sharing restrictions.
 
-**Reason:** official FHIR validation packages / a conformant validator were not available in the execution environment; installing them via package services was unavailable. The pack is **syntactically valid JSON with local consistency checks, not an officially validated FHIR implementation**.
+**Historical execution note (10 November only):** official FHIR validation packages / a conformant validator were not available in that execution environment; installing them via package services was unavailable. The subsequent 12 November **core R4 validation** is recorded separately above and does not establish clinical IG conformance or an independently validated implementation.
 
 ## Remaining research questions for Kevin (no assumption of a gap)
 
