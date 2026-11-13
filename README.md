@@ -2,7 +2,7 @@
 
 A small, **synthetic and independently inspectable** research exercise examining what a receiving system can establish from FHIR R4 diagnostic workflow records.
 
-**Status:** exploratory. The author reports 10 local structural/behavioural tests passing. The fixtures have **not** passed the official HL7 R4 validator or relevant implementation-guide validation, and **no independent receiver or clinical interoperability test** has been completed. The experiment is not an HL7, IHE or NHS conformance claim or endorsement.
+**Status (13 November 2026):** exploratory, synthetic research. The 12 November comparison run reports **zero errors/fatals in official FHIR R4 core 4.0.1 validation across six synthetic Bundles**, with **47 narrative warnings and eight informational messages**, and **18/18 study-local tests passing** (10 baseline plus 8 comparison). No clinical implementation-guide validation, independent receiver implementation, live LIS–EHR exchange or clinical interoperability test has been completed. These results do **not** establish HL7, IHE or NHS conformance, completeness of real clinical results, or endorsement. See the [dated validation record](comparison/VALIDATION_RECORD_2026-11-12.md).
 
 ## Official R4 core validation and comparison (12 November 2026)
 
