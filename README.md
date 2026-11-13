@@ -1,8 +1,22 @@
-# FHIR R4 receiver evidence test
+# Expected laboratory report evidence — synthetic FHIR R4 receiver test
 
 A small, **synthetic and independently inspectable** research exercise examining what a receiving system can establish from FHIR R4 diagnostic workflow records.
 
 **Status (13 November 2026):** exploratory, synthetic research. The 12 November comparison run reports **zero errors/fatals in official FHIR R4 core 4.0.1 validation across six synthetic Bundles**, with **47 narrative warnings and eight informational messages**, and **18/18 study-local tests passing** (10 baseline plus 8 comparison). No clinical implementation-guide validation, independent receiver implementation, live LIS–EHR exchange or clinical interoperability test has been completed. These results do **not** establish HL7, IHE or NHS conformance, completeness of real clinical results, or endorsement. See the [dated validation record](comparison/VALIDATION_RECORD_2026-11-12.md).
+
+## The clinical-operational question comes first
+
+**One problem:** A clinician places a laboratory order. At a defined review point, the ordering EHR needs to distinguish an expected **final** result report that is present and linked to that order from a report that is not evidenced in the receiver-visible records. The EHR must also be able to retain **unknown** when the expected-report set or order linkage is incomplete.
+
+**One bounded question:** For one clinician-initiated ordering episode, can the receiving EHR determine, from a defined snapshot and an explicitly stated expected-report list, which expected final reports are present and correctly linked to the clinician's order?
+
+**One measurable synthetic test:** Compare the agreed expected report identifiers with final, order-linked reports visible at a specified observation point. Report (1) expected report not evidenced in the snapshot, (2) all reports on an agreed exhaustive list evidenced in the snapshot, or (3) known reports evidenced but the wider expected set unknown. These are **evidence states**, not claims that a test was never performed, a message was never sent, or care was completed.
+
+**Explicit exclusions:** This first question does not measure turnaround time, whether the clinician viewed or acted on the report, clinical adequacy, placer acceptance of fulfilment, or preliminary-to-final/amended-report transitions. Unsolicited or reflex results are a separate follow-up scenario, not presumed to belong to the original clinician order.
+
+**Technology boundary:** The implementers discussion identified existing laboratory HL7 v2 interfaces as the practical setting for the operational question. This repository does **not** inspect a live HL7 v2 exchange. Its FHIR R4 `ServiceRequest`, `DiagnosticReport` and `Task` examples are **synthetic representations used to compare evidence rules**, not claims that LIS–EHR result delivery currently uses FHIR Task. FHIR modelling is secondary to the operational question.
+
+*Research framing clarified on 13 November 2026 after implementer feedback. The frozen synthetic fixtures, original tests and dated validation results are unchanged.*
 
 ## Official R4 core validation and comparison (12 November 2026)
 
@@ -11,18 +25,13 @@ A small, **synthetic and independently inspectable** research exercise examining
 - Read the [dated validation record](comparison/VALIDATION_RECORD_2026-11-12.md), [FHIR-native comparison](comparison/COMPARISON.md), and [independent reproduction invitation](comparison/INDEPENDENT_RECEIVER_INVITATION.md).
 - Existing standards support grouping requests and parent/child Tasks; whether the receiver can establish an **exhaustive expected set** from what is exchanged remains an open, implementation-dependent research question. [Contribute a correction or counterexample in Issue #1](https://github.com/La-Touche-Infrastructure-Ltd/fhir-responsibility-receiver-test/issues/1).
 
-## The research question
+## What the synthetic FHIR comparison tests
 
-A sender may mark a `Task` completed even when the receiving system cannot establish that it has **every expected diagnostic report**.
+The FHIR R4 examples test a **narrower modelling issue**: when a synthetic `Task` records `completed`, can a receiver distinguish that reported workflow state from the evidence of final `DiagnosticReport` resources linked to an **explicitly agreed** set of `ServiceRequest` identifiers?
 
-Can a receiver use existing FHIR R4 resources, applicable implementation guides and/or a specified inter-organisational agreement to determine:
+The receiver's expected-set assumption comes from the synthetic external `receiver-policy.json`. It is **not** a claim that a real EHR, LIS, FHIR resource or implementation guide supplies an authoritative exhaustive list automatically.
 
-- What reports it has evidence of receiving?
-- Whether the set of expected requests is known to be exhaustive?
-- Whether completion is only **reported**, or independently **supported within an agreed scope**?
-- What remains unknown when the exchange or search coverage is incomplete?
-
-No conclusion about clinical adequacy, authority, unseen obligations or real-world completion is inferred from a status or an absent record alone.
+A `Task` completion flag is not treated as proof of result delivery, clinical adequacy, clinician acknowledgement or the ordering party's acceptance of fulfilment. Whether a particular real-world interface already provides adequate reconciliation and expectation boundaries remains untested. This exercise does not demonstrate a deficiency in FHIR, HL7 v2, IHE or any deployed system.
 
 ## Run the existing v0.2 experiment
 
