@@ -3,12 +3,7 @@ on:
   push:
     branches: [main, research/fhir-native-comparison-2026-11-12]
   pull_request:
-    paths:
-      - "fixtures/**"
-      - "comparison/**"
-      - "*.py"
-      - "receiver-policy.json"
-      - ".github/workflows/validate-fhir-r4.yml"
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
